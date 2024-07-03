@@ -1,3 +1,7 @@
+"""
+Module to convert data to markdown using LlamaParse.
+"""
+
 from llama_parse import LlamaParse
 from dotenv import load_dotenv
 import os
@@ -6,6 +10,9 @@ load_dotenv()
 
 class Parser:
     def __init__(self):
+        """
+        Initialize the Parser class with LlamaParse configuration.
+        """
         self.parser = LlamaParse(
             api_key=os.getenv("LLAMAINDEX_PARSE_API_KEY"), 
             result_type="markdown", 

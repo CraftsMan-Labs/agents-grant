@@ -6,3 +6,17 @@ streamlit
 python-dotenv
 requests
 sqlalchemy
+nest-asyncio
+llama-index
+python-dotenv 
+llama-index-vector-stores-qdrant 
+llama-index-readers-file 
+llama-index-embeddings-fastembed 
+llama-index-llms-openai
+docx2txt
+torch 
+transformers 
+python-pptx 
+Pillow
+pinecone-client
+llama-parse

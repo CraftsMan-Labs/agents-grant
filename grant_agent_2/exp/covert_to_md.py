@@ -13,5 +13,3 @@ class Parser:
             verbose=True,
             language="en",  
         )
-
-parser = Parser()

@@ -20,3 +20,4 @@ python-pptx
 Pillow
 pinecone-client
 llama-parse
+graphrag

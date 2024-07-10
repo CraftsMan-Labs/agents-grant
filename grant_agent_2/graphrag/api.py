@@ -13,6 +13,7 @@ class QueryRequest(BaseModel):
 def global_search(request: QueryRequest):
     try:
         res = ask_query_global(request.query)
+        print(res)
         return {"response": res['response']}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -21,6 +22,7 @@ def global_search(request: QueryRequest):
 def local_search(request: QueryRequest):
     try:
         res = ask_query_local(request.query)
+        print(res)
         return {"response": res['response']}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -13,11 +13,6 @@ from langchain_core.prompts import (PromptTemplate, MessagesPlaceholder,
 from langchain_openai import ChatOpenAI
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain.tools import tool
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from global_search import ask_query_global
-from local_search import ask_query_local
 
 # Load environment variables
 load_dotenv()
@@ -270,7 +265,6 @@ with gr.Blocks() as demo:
         with gr.Column(scale=3):
             chat_interface = gr.ChatInterface(
                 fn=chat,
-                examples=["Hi I am lookging for a SWE can you help me?"],
                 title="Grant Acquisition Specialist Chatbot"
             )
         with gr.Column(scale=1):

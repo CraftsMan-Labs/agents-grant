@@ -48,6 +48,24 @@ class GrantDetails(BaseModel):
         description="Outcomes of the project")
     project_execution_plan: Optional[str] = Field(
         description="Execution plan of the project")
+    
+class GrantWriteModel(BaseModel):
+    grant_name: str
+    grant_amount: str
+    conditions: List[str]
+    eligibility_criteria: List[str]
+    grant_category: str
+    sponsor: str
+    additional_info: str
+    project_name: Optional[str] = Field(description="Name of the project")
+    project_description: Optional[str] = Field(
+        description="Description of the project")
+    project_usecase: Optional[str] = Field(
+        description="Usecase of the project")
+    project_outcomes: Optional[str] = Field(
+        description="Outcomes of the project")
+    project_execution_plan: Optional[str] = Field(
+        description="Execution plan of the project")
 
 
 @tool
@@ -105,6 +123,34 @@ def update_grant_acquisition_requirements(talent_acquisition_requirements: Grant
     search_results = search_results['response']
     return search_results
 
+@tool
+def write_sample_grant_document(data: GrantWriteModel) -> str:
+    """
+    Generate a sample grant document based on the grant details provided.
+    """
+    llm = ChatOpenAI(
+            model='gpt-4o', temperature=0.8, api_key=os.getenv('OPENAI_API_KEY'))
+    prompt = f"""
+    ==========================Grant Details==========================
+    Grant Name: {data.grant_name}
+    Grant Amount: {data.grant_amount}
+    Conditions: {', '.join(data.conditions)}
+    Eligibility Criteria: {', '.join(data.eligibility_criteria)}
+    Grant Category: {data.grant_category}
+    Sponsor: {data.sponsor}
+    Additional Info: {data.additional_info}
+    Project Name: {data.project_name}
+    Project Description: {data.project_description}
+    Project Usecase: {data.project_usecase}
+    Project Outcomes: {data.project_outcomes}
+    Project Execution Plan: {data.project_execution_plan}
+    ==============================================================
+    INSTRUCTIONS:
+    - Update the grant details as needed.
+
+    Write a sample grant document based on the grant details provided above.
+
+    """    
 
 class GrantAcquisitionBot:
     def __init__(self):
@@ -166,7 +212,6 @@ Required fields:
 - grant_amount
 - conditions
 - eligibility_criteria
-- application_process
 - unusual_conditions
 - grant_category
 - additional_info

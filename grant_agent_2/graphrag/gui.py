@@ -70,16 +70,6 @@ class GrantWriteModel(BaseModel):
 
 @tool
 def update_grant_acquisition_requirements(talent_acquisition_requirements: GrantDetails, search_type="local") -> str:
-    """
-    Search for suitable grants based on the requirements provided.
-
-    Args:
-        talent_acquisition_requirements (GrantDetails): The requirements for the grant.
-        search_type (str): The type of search to perform, either "global" or "local".
-
-    Returns:
-        str: The search results.
-    """
     """When a person searching for grants you call this function to search for suitable grants based on the requirements provided."""
     print("--------Function update_talent_acquisition_requirements called--------")
     print("Requirements: ", talent_acquisition_requirements)
@@ -150,7 +140,9 @@ def write_sample_grant_document(data: GrantWriteModel) -> str:
 
     Write a sample grant document based on the grant details provided above.
 
-    """    
+    """ 
+    response = llm.invoke(prompt)
+    return response.content
 
 class GrantAcquisitionBot:
     def __init__(self):
@@ -224,8 +216,8 @@ Required fields:
 Ask questions one at a time and avoid getting sidetracked into off-topic conversations. Keep it simple and short. Call update_grant_details once all the requirements are gathered from the user.
 =============================================================
 
-==========================After recommending a grant==========================
-generate a draft docuement on the grant you think is more suitable
+==========================Grant Recommendation==========================
+Recommend Suitable Grants and details of each grant on why they might be eligible
 =============================================================
 """
 

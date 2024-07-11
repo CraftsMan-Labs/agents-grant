@@ -25,7 +25,7 @@ This repository contains a Grant Acquisition Specialist Chatbot designed to assi
 ### Running the FastAPI Server
 To run the FastAPI server, execute the following command:
 ```bash
-uvicorn grant_agent_2.graphrag.api:app --reload
+python api.py
 ```
 
 ### Running the Streamlit Interface

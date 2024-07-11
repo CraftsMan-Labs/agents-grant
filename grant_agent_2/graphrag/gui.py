@@ -77,7 +77,7 @@ def update_grant_acquisition_requirements(talent_acquisition_requirements: Grant
     params = talent_acquisition_requirements.dict()
     params = [f"{key}={value}" for key, value in params.items() if value]
     query_search = " \n".join(params)
-    query_search = "Search for grants based on the following requirements: " + query_search
+    query_search = "Search for grants based on the following requirements: " + query_search + "\n Return the suitable grant names as well their corresponding grant URLS as well"
     query_search = str(query_search)
     # utf-8 encoding
     query_search = query_search.encode('utf-8').decode('utf-8')

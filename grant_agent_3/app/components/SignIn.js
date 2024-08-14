@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SignIn.css';
 
@@ -7,11 +7,18 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    // Add any side effects here
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/token', { username: email, password });
+      const response = await axios.post('http://localhost:8000/token', { username: email, password });
       setMessage('Sign in successful!');
+      // Handle token storage
+      const { access_token } = response.data;
+      localStorage.setItem('token', access_token);
     } catch (error) {
       setMessage('Sign in failed. Please try again.');
     }

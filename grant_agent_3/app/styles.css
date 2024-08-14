@@ -109,3 +109,56 @@ button:hover {
   background-color: #00ff00;
   color: #0d0d0d;
 }
+
+/* Sign-in and Sign-up Form Styles */
+.signin-container,
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1a;
+  border: 2px solid #00ff00;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff00;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.signin-container h2,
+.signup-container h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  background-color: #0d0d0d;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0d0d0d;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #00ff00;
+  color: #0d0d0d;
+}

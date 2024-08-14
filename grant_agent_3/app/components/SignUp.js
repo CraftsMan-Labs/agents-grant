@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SignUp.css';
 
@@ -8,11 +8,18 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    // Add any side effects here
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/signup', { username, email, password });
+      const response = await axios.post('http://localhost:8000/signup', { username, email, password });
       setMessage('Sign up successful!');
+      // Handle token storage
+      const { access_token } = response.data;
+      localStorage.setItem('token', access_token);
 
       // Send request to local_search endpoint
       const searchResponse = await axios.post('/local_search', { query: 'user requirements' });

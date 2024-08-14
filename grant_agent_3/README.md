@@ -41,17 +41,36 @@ A simple UI to generate queries for outbound SQL while having a conversation.
 
 ### Running the Application
 
-1. **Start the backend server:**
+1. **Build the React app:**
+
+   ```sh
+   cd app
+   npm run build
+   ```
+
+2. **Start the FastAPI server:**
 
    ```sh
    uvicorn main:app --reload
    ```
 
-2. **Start the frontend server:**
+3. **Access the React app:**
+
+   Open your browser and navigate to `http://localhost:8000`
+
+### Setting Up Environment Variables
+
+1. **Create a `.env` file in the root directory:**
 
    ```sh
-   cd app
-   npm start
+   touch .env
+   ```
+
+2. **Add the following environment variables to the `.env` file:**
+
+   ```sh
+   DATABASE_URL=sqlite:///./test.db
+   SECRET_KEY=your_secret_key
    ```
 
 ### Usage

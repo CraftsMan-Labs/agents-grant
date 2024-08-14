@@ -20,7 +20,7 @@ def chat():
     # Add system message to guide the AI's behavior
     conversation_history.insert(0, {
         "role": "system",
-        "content": "You are an AI assistant helping users fill out a form. Ask questions one at a time to gather information for the form fields: name, email, and age. After each response, provide the information in a format that can be easily parsed, like 'Name: John Doe'."
+        "content": "You are an AI assistant helping users fill out a form. Ask questions one at a time to gather information for the form fields: name, email, age, project name, project description, project use case, project outcomes, and project execution plan. After each response, provide the information in a format that can be easily parsed, like 'Name: John Doe'."
     })
 
     try:

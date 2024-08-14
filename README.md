@@ -28,6 +28,21 @@ To run the FastAPI server, execute the following command:
 python grant_agent_3/app/main.py
 ```
 
+### Accessing the Front End
+To access the front end user interface, open your web browser and navigate to:
+```
+http://localhost:8000
+```
+
+## Front End Components
+The front end of `grant_agent_3` is built using React and includes the following components:
+
+- **SignUp**: A component for user registration.
+- **SignIn**: A component for user login.
+- **Chat**: A component for interacting with the chatbot.
+
+These components are located in the `grant_agent_3/app/components` directory.
+
 ### Running the Streamlit Interface
 To run the Streamlit interface, execute the following command:
 ```bash

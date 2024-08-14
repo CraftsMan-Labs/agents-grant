@@ -13,6 +13,10 @@ const SignUp = () => {
     try {
       const response = await axios.post('/signup', { username, email, password });
       setMessage('Sign up successful!');
+
+      // Send request to local_search endpoint
+      const searchResponse = await axios.post('/local_search', { query: 'user requirements' });
+      console.log('Search Response:', searchResponse.data);
     } catch (error) {
       setMessage('Sign up failed. Please try again.');
     }

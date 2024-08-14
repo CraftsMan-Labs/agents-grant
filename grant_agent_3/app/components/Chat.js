@@ -9,13 +9,14 @@ const Chat = () => {
     if (input.trim()) {
       setMessages([...messages, { sender: 'user', text: input }]);
       setInput('');
-      // Simulate AI response
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { sender: 'ai', text: 'This is a simulated response.' },
-        ]);
-      }, 1000);
+      // Send request to local_search endpoint
+      const searchResponse = await axios.post('/local_search', { query: input });
+      const aiResponse = searchResponse.data.response;
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: 'ai', text: aiResponse },
+      ]);
     }
   };
 

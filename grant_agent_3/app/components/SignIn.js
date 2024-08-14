@@ -14,7 +14,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/token', { username: email, password });
+      const response = await axios.post('http://localhost:8000/api/token', { username: email, password });
       setMessage('Sign in successful!');
       // Handle token storage
       const { access_token } = response.data;

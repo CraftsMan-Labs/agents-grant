@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "your_default_secret_key")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/token")
 
 class User(Base):
     __tablename__ = "users"
@@ -114,7 +114,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         raise credentials_exception
     return user
 
-@app.post("/token", response_model=Token)
+@app.post("/api/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(SessionLocal)):
     try:
         user = authenticate_user(db, form_data.username, form_data.password)
@@ -132,7 +132,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     finally:
         db.close()
 
-@app.post("/signup", response_model=UserInDB)
+@app.post("/api/signup", response_model=UserInDB)
 async def signup(user: UserCreate, db: Session = Depends(SessionLocal)):
     try:
         db_user = get_user(db, username=user.username)

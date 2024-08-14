@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
+import logging
+from fastapi.responses import FileResponse
 import os
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String
@@ -10,6 +12,10 @@ from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -134,8 +140,14 @@ async def signup(user: UserCreate, db: Session = Depends(SessionLocal)):
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
-app.mount("/", StaticFiles(directory="grant_agent_3/app/build", html=True), name="static")
+if os.path.isdir("grant_agent_3/app/build"):
+    logger.info("Static files directory exists. Mounting static files.")
+    app.mount("/", StaticFiles(directory="grant_agent_3/app/build", html=True), name="static")
 
-@app.get("/{full_path:path}")
-async def serve_react_app():
-    return FileResponse("grant_agent_3/app/build/index.html")
+    @app.get("/{full_path:path}")
+    async def serve_react_app():
+        return FileResponse("grant_agent_3/app/build/index.html")
+else:
+    logger.warning("Static files directory does not exist. Skipping mounting static files.")
+    async def serve_react_app():
+        return FileResponse("grant_agent_3/app/build/index.html")

@@ -30,6 +30,11 @@
     SECRET_KEY=your_secret_key
     ```
 
+5. **Create the build directory (if it doesn't exist):**
+    ```bash
+    mkdir -p grant_agent_3/app/build
+    ```
+
 ## Usage
 ### Running the FastAPI Server
 To run the FastAPI server, execute the following command:
@@ -37,6 +42,7 @@ To run the FastAPI server, execute the following command:
 python grant_agent_3/app/main.py
 ```
 
+<<<<<<< Updated upstream
 ### Accessing the Front End
 To access the front end user interface, open your web browser and navigate to:
 ```
@@ -51,3 +57,9 @@ The front end of `grant_agent_3` is built using React and includes the following
 - **Chat**: A component for interacting with the chatbot.
 
 These components are located in the `grant_agent_3/app/components` directory.
+=======
+### Running the Streamlit Interface
+To run the Streamlit interface, execute the following command:
+```bash
+streamlit run grant_agent_3/app/ui.py
+>>>>>>> Stashed changes

@@ -12,7 +12,7 @@ const Chat = () => {
       setInput('');
       try {
         // Send request to local_search endpoint
-        const searchResponse = await axios.post('http://localhost:8000/local_search', { query: input });
+        const searchResponse = await axios.post('http://localhost:8000/api/local_search', { query: input });
         const aiResponse = searchResponse.data.response;
 
         setMessages((prevMessages) => [

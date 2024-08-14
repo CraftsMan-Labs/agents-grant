@@ -45,3 +45,5 @@ pinecone-client
 llama-parse
 graphrag
 gradio
+passlib
+python-jose

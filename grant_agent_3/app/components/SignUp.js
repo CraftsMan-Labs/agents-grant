@@ -20,12 +20,12 @@ const SignUp = () => {
       // Handle token storage
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
-
-      // Send request to local_search endpoint
-      const searchResponse = await axios.post('/local_search', { query: 'user requirements' });
-      console.log('Search Response:', searchResponse.data);
     } catch (error) {
-      setMessage('Sign up failed. Please try again.');
+      if (error.response && error.response.status === 400) {
+        setMessage('Username already registered. Please try a different username.');
+      } else {
+        setMessage('Sign up failed. Please try again.');
+      }
     }
   };
 

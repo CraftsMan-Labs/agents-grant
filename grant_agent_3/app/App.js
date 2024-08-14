@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import Chat from './components/Chat';
@@ -9,14 +9,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Switch>
-          <Route path="/signup" component={SignUp} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/chat" component={Chat} />
-          <Route exact path="/">
-            <Redirect to="/signin" />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/" element={<Navigate to="/signin" />} />
+        </Routes>
       </div>
     </Router>
   );

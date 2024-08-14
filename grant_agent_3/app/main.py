@@ -140,14 +140,25 @@ async def signup(user: UserCreate, db: Session = Depends(SessionLocal)):
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
-if os.path.isdir("/app/build"):
+build_dir = "build/"
+if os.path.isdir(build_dir):
     logger.info("Static files directory exists. Mounting static files.")
-    app.mount("/", StaticFiles(directory="/app/build", html=True), name="static")
+    app.mount("/", StaticFiles(directory=build_dir, html=True), name="static")
+
+    @app.get("/")
+    async def serve_root():
+        return FileResponse(f"{build_dir}/index.html")
 
     @app.get("/{full_path:path}")
-    async def serve_react_app():
-        return FileResponse("/app/build/index.html")
+    async def serve_react_app(full_path: str):
+        return FileResponse(f"{build_dir}/index.html")
 else:
     logger.warning("Static files directory does not exist. Skipping mounting static files.")
-    async def serve_react_app():
-        return FileResponse("app/build/index.html")
+
+    @app.get("/")
+    async def serve_root():
+        return {"detail": "Static files directory not found"}
+
+    @app.get("/{full_path:path}")
+    async def serve_react_app(full_path: str):
+        return {"detail": "Static files directory not found"}

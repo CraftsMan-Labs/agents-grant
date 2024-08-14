@@ -25,7 +25,7 @@ This repository contains a Grant Acquisition Specialist Chatbot designed to assi
 ### Running the FastAPI Server
 To run the FastAPI server, execute the following command:
 ```bash
-python api.py
+python grant_agent_3/app/main.py
 ```
 
 ### Running the Streamlit Interface

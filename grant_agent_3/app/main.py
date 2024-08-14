@@ -33,5 +33,15 @@ def chat():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/submit', methods=['POST'])
+def submit():
+    data = request.json
+    form_data = data['form_data']
+
+    # Process the form data as needed
+    # For example, save it to a database or send it via email
+
+    return jsonify({"message": "Form data submitted successfully"})
+
 if __name__ == '__main__':
     app.run(debug=True)

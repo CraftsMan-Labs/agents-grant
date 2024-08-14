@@ -9,6 +9,7 @@ import jwt
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.staticfiles import StaticFiles
+import logging
 
 app = FastAPI()
 
@@ -133,7 +134,18 @@ async def signup(user: UserCreate, db: Session = Depends(SessionLocal)):
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
-app.mount("/", StaticFiles(directory="grant_agent_3/app/build", html=True), name="static")
+# Add a check to see if the directory exists before mounting the static files
+static_files_directory = "grant_agent_3/app/build"
+if not os.path.exists(static_files_directory):
+    try:
+        os.makedirs(static_files_directory)
+        logging.info(f"Directory '{static_files_directory}' created.")
+    except Exception as e:
+        logging.error(f"Error creating directory '{static_files_directory}': {e}")
+else:
+    logging.info(f"Directory '{static_files_directory}' already exists.")
+
+app.mount("/", StaticFiles(directory=static_files_directory, html=True), name="static")
 
 @app.get("/{full_path:path}")
 async def serve_react_app():

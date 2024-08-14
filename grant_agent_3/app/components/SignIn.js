@@ -20,7 +20,11 @@ const SignIn = () => {
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
     } catch (error) {
-      setMessage('Sign in failed. Please try again.');
+      if (error.response && error.response.status === 401) {
+        setMessage('Invalid email or password. Please try again.');
+      } else {
+        setMessage('Sign in failed. Please try again.');
+      }
     }
   };
 

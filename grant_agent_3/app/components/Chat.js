@@ -10,16 +10,28 @@ const Chat = () => {
     if (input.trim()) {
       setMessages([...messages, { sender: 'user', text: input }]);
       setInput('');
-      // Send request to local_search endpoint
-      const searchResponse = await axios.post('/local_search', { query: input });
-      const aiResponse = searchResponse.data.response;
+      try {
+        // Send request to local_search endpoint
+        const searchResponse = await axios.post('http://localhost:8000/local_search', { query: input });
+        const aiResponse = searchResponse.data.response;
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: 'ai', text: aiResponse },
-      ]);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { sender: 'ai', text: aiResponse },
+        ]);
+      } catch (error) {
+        console.error('Error sending message:', error);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { sender: 'ai', text: 'Sorry, something went wrong. Please try again.' },
+        ]);
+      }
     }
   };
+
+  useEffect(() => {
+    // Add any necessary side effects here
+  }, []);
 
   return (
     <div className="chat-container">

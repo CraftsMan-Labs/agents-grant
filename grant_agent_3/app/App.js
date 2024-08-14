@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import Chat from './components/Chat';
@@ -13,6 +13,9 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/chat" component={Chat} />
+          <Route exact path="/">
+            <Redirect to="/signin" />
+          </Route>
         </Switch>
       </div>
     </Router>
